@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Fa500Px } from "react-icons/fa"
 
 import { ThemeProvider } from "styled-components"
 import {Header} from "./components/header"
@@ -12,13 +13,14 @@ import { Flex, Screen, Typography } from "./style"
 import { darkTheme, lightTheme } from "./style/theme"
 
 function App() {
-  const PHOTOS_PER_PAGE = 8
-
+  const PHOTOS_PER_PAGE = 20
 
   const [theme, setTheme] = useState('dark')
   const [photos, setPhotos] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [photosPerPage, setPhotosPerPage] = useState()
+  const [photosPerPage, setPhotosPerPage] = useState(PHOTOS_PER_PAGE)
+
+  const releaseLoading = () => setIsLoading(false)
 
 
   const themeToggler = () =>{
@@ -26,10 +28,11 @@ function App() {
   }
 
   async function fetchPhotos(){
-    const data = await getPhotos()
+    const data = await getPhotos(photosPerPage, releaseLoading)
 
-    console.log(data)
+    setPhotos(data)
   }
+  
 
   useEffect(()=>{
     fetchPhotos()
@@ -41,8 +44,8 @@ function App() {
         <NavBar themeToggler={themeToggler} theme={theme}/>
         <Flex gap='2px'>
           <Header/>
-          <Stories/>
-          <Publications/>
+          <Stories photos={photos}/>
+          <Publications photos={photos}/>
         </Flex>
       </Screen>
     </ThemeProvider>

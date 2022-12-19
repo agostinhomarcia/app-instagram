@@ -10,7 +10,7 @@ export const getPhotos = async(photosPerPage, callback) =>{
     try {
         response = await client.photos.curated({
             page: 1,
-            per_page: 8
+            per_page: photosPerPage
         })
         return response?.photos;
     } catch (error) {

@@ -15,6 +15,7 @@ export const ContainerPublications = styled.div`
   gap: 12px;
   height: 320px;
   overflow-y: scroll;
+  
   &::-webkit-scrollbar {
     width: 4px;
     height: 4px;

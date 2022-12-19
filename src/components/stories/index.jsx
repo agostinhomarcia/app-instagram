@@ -3,14 +3,15 @@ import { Button, Flex, Typography } from '../../style'
 import * as C from './style'
 import Perfil from "../../assets/perfil.svg";
 
-function Stories() {
+function Stories({photos}) {
     const [showAll, setShowAll] = useState(false);
+
+    photos =showAll ? photos : photos?.slice(0,10)
 
     function handleShowAll(){
         setShowAll(!showAll)
     }
 
-    const numberArry = showAll ?  20 : 8
   return (
     <Flex padding='8px 20px' align='start' gap='4px'>
         <Typography weight='400' size='18px' height='21px'>
@@ -25,11 +26,11 @@ function Stories() {
 
             <C.Container>
                 {
-                    Array.from(Array(numberArry)).map((item, index)=>(
-                    <C.Profile key={index}>
+                    photos.map((photo)=>(
+                    <C.Profile key={photo?.id}>
                     <img
-                        src={Perfil}
-                        alt="imagem perfil github"
+                        src={photo?.src?.medium}
+                        alt="fotografia"
                     />
                     </C.Profile>
                     ))
