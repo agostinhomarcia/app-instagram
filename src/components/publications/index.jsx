@@ -1,6 +1,6 @@
 import { Typography } from "../../style";
 import InfoProfile from "../infoProfile";
-import Perfil from "../../assets/perfil.svg";
+
 
 import * as C from "./style";
 
