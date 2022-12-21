@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Fa500Px } from "react-icons/fa"
+import ReactLoading from 'react-loading';
 
 import { ThemeProvider } from "styled-components"
 import {Header} from "./components/header"
@@ -9,11 +9,11 @@ import Stories from "./components/stories"
 import { getPhotos } from "./services/photos"
 
 
-import { Flex, Screen, Typography } from "./style"
+import { Button, Flex, Screen, Typography } from "./style"
 import { darkTheme, lightTheme } from "./style/theme"
 
 function App() {
-  const PHOTOS_PER_PAGE = 20
+  const PHOTOS_PER_PAGE = 8
 
   const [theme, setTheme] = useState('dark')
   const [photos, setPhotos] = useState([])
@@ -26,8 +26,13 @@ function App() {
   const themeToggler = () =>{
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }
+    const handlePhotosPerPage = () => {
+    setPhotosPerPage(photosPerPage + PHOTOS_PER_PAGE);
+  };
+  
 
   async function fetchPhotos(){
+    setIsLoading(true)
     const data = await getPhotos(photosPerPage, releaseLoading)
 
     setPhotos(data)
@@ -36,7 +41,7 @@ function App() {
 
   useEffect(()=>{
     fetchPhotos()
-  },[])
+  },[photosPerPage])
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -46,6 +51,20 @@ function App() {
           <Header/>
           <Stories photos={photos}/>
           <Publications photos={photos}/>
+            {
+              isLoading ? (
+                <ReactLoading
+              type="spinningBubbles"
+              color={theme.textPrimary}
+              height={20}
+              width={20}
+            />
+              ) : (
+                <Button onClick={handlePhotosPerPage}>
+                  <Typography>Ver mais</Typography>
+                </Button>
+              )
+            }
         </Flex>
       </Screen>
     </ThemeProvider>
