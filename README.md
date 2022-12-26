@@ -43,7 +43,7 @@
 
 <h4 align="center">Instagram </h4>
 <p align="center">
-   <img src="https://media.giphy.com/media/6WlPgcaasi3kotOmmd/giphy.gif" alt="insta"       width="690"/>
+   <img src="https://media.giphy.com/media/6WlPgcaasi3kotOmmd/giphy.gif" alt="insta" width="690"/>
 </p>
 
 ## :sparkles: Features
