@@ -15,32 +15,32 @@ import { darkTheme, lightTheme } from "./style/theme"
 function App() {
   const PHOTOS_PER_PAGE = 8
 
-  const [theme, setTheme] = useState('dark')
-  const [photos, setPhotos] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [photosPerPage, setPhotosPerPage] = useState(PHOTOS_PER_PAGE)
+    const [theme, setTheme] = useState('dark')
+    const [photos, setPhotos] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [photosPerPage, setPhotosPerPage] = useState(PHOTOS_PER_PAGE)
 
-  const releaseLoading = () => setIsLoading(false)
+    const releaseLoading = () => setIsLoading(false)
 
 
-  const themeToggler = () =>{
-    theme === 'light' ? setTheme('dark') : setTheme('light')
-  }
-    const handlePhotosPerPage = () => {
-    setPhotosPerPage(photosPerPage + PHOTOS_PER_PAGE);
-  };
-  
+    const themeToggler = () =>{
+      theme === 'light' ? setTheme('dark') : setTheme('light')
+    }
+      const handlePhotosPerPage = () => {
+      setPhotosPerPage(photosPerPage + PHOTOS_PER_PAGE);
+    };
+    
 
-  async function fetchPhotos(){
-    setIsLoading(true)
-    const data = await getPhotos(photosPerPage, releaseLoading)
+    async function fetchPhotos(){
+      setIsLoading(true)
+      const data = await getPhotos(photosPerPage, releaseLoading)
 
-    setPhotos(data)
-  }
-  
+      setPhotos(data)
+    }
+    
 
-  useEffect(()=>{
-    fetchPhotos()
+    useEffect(()=>{
+      fetchPhotos()
   },[photosPerPage])
 
   return (
